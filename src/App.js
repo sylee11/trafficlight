@@ -1,26 +1,46 @@
-import React from 'react';
+import React, {Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
+import TraFic from "./Component/TraFic";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const RED = 0;
+const GREEN = 1;
+const BLUE = 2;
+
+
+class App extends Component {
+    constructor() {
+        super();
+        this.state = {
+            curentColor: RED
+    }
+        ;
+        setInterval(() => {
+            console.log(this.state);
+            this.setState({
+                curentColor: this.getNextColor(this.state.curentColor)
+            });
+
+        }, 1000);
+    }
+
+    getNextColor(color) {
+        switch (color) {
+            case RED:
+                return BLUE;
+            case BLUE:
+                return GREEN;
+            case GREEN:
+                return RED;
+
+        }
+    }
+
+    render() {
+        return (
+            <TraFic curentColor={this.state.curentColor}/>
+        );
+    }
 }
 
 export default App;
